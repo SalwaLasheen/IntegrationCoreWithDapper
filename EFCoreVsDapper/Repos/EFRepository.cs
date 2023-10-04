@@ -6,13 +6,15 @@ namespace EFCoreVsDapper.Repos
 {
     public class EFRepository
     {
-        public List<Employee> GetEmployeesWithEF()
+        public List<string> GetEmployeesNameWithEFCoreWithNoTracking()
         {
             using (var db = new ApplicationDbContext())
             {
-                var employees = db.Employees.Take(600).AsNoTracking().ToList();
+                var employees = db.Employees.Take(100).Select(x=>x.EmployeeName).AsNoTracking().ToList();
                 return employees.ToList();
             }
         }
+
+
     }
 }

@@ -1,10 +1,13 @@
 ﻿using DataAccessLayer.Application.Dtos;
 using DataAccessLayer.Application.Repositories;
+using DataAccessLayer.Application.Repositories.CompareNewVersion;
 using DataAccessLayer.Application.Repositories.Interface;
 using DataAccessLayer.Models;
 using DataAccessLayer.Persistence.Context;
 using DataAccessLayer.Persistence.FakerData;
 using DataAccessLayer.Persistence.Interfaces;
+using EFCore2VSDapper;
+using EFCoreVsDapper.Repos;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -26,6 +29,12 @@ namespace DataAccessLayer.DependencyInjection
                          throw new ApplicationException("the Connection string is null");
                 return new SqlConnectionFactory(connectionString);
             });
+            services.AddTransient<CoreAsDapperRepository>();
+            services.AddTransient <DapperRepository>();
+            services.AddTransient<EFRepository>();
+            services.AddTransient<EFCore2VsDapperBenchMarks>();
+            
+
             services.AddTransient<FakeData>();
             services.AddTransient<ICoreAsDapperRepository<EmployeeInfo>, CoreAsDapperEmployeeRepository>();
             services.AddTransient<IDapperRepository<EmployeeInfo>, DapperEmployeeRepository>();

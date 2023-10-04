@@ -1,9 +1,8 @@
 ﻿using Dapper;
-using EFCoreVsDapper.Models;
 using Microsoft.Data.SqlClient;
 using System.Data;
 
-namespace EFCoreVsDapper.Repos
+namespace DataAccessLayer.Application.Repositories.CompareNewVersion
 {
     public class DapperRepository
     {

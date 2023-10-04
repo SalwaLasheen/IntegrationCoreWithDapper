@@ -12,8 +12,8 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 var app = builder.Build();
 
-var summary = BenchmarkRunner.Run(typeof(EFCore2VsDapper));
+var summary = BenchmarkRunner.Run(typeof(EFCore2VsDapperBenchMarks));
 
-Console.WriteLine("done");
+Console.WriteLine("Done");
 Console.ReadLine();
 app.Run();

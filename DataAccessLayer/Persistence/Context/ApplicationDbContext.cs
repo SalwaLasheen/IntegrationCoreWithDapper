@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Scaffolding.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.Internal;
+using System.Data.Common;
 
 namespace DataAccessLayer.Persistence.Context;
 public partial class ApplicationDbContext : DbContext
@@ -30,6 +31,14 @@ public partial class ApplicationDbContext : DbContext
         ConfigurationBuilder(modelBuilder);
         OnModelCreatingPartial(modelBuilder);
     }
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+        if (!optionsBuilder.IsConfigured)
+        {
+            optionsBuilder.UseSqlServer(@"Server=localhost; Database=DemoDb; Trusted_Connection=True;Encrypt=false; MultipleActiveResultSets=true;Trust Server Certificate=true");
+        }
+    }
+
     private static void ConfigurationBuilder(ModelBuilder modelBuilder)
     {
 

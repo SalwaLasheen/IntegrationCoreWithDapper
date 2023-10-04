@@ -4,6 +4,8 @@ using DataAccessLayer.Application.Dtos;
 using DataAccessLayer.Application.Repositories.Interface;
 using DataAccessLayer.Models;
 using DataAccessLayer.Persistence.Context;
+using Microsoft.Data.SqlClient;
+using System.Data;
 
 namespace DataAccessLayer.Application.Repositories
 {
@@ -17,10 +19,13 @@ namespace DataAccessLayer.Application.Repositories
 
         public async Task<List<EmployeeInfo>> Dapper_GetAllEmployeesAsync()
         {
-            using var connection = _sqlConnectionFactory.Create();
-            const string query = $"select top 600 * from Employees";
-            var allEmployees = await connection.QueryAsync<EmployeeInfo>(query);
-            return allEmployees.ToList();
+            //using var connection = _sqlConnectionFactory.Create();
+            using (IDbConnection db = new SqlConnection(@"Server=localhost; Database=DemoDb; Trusted_Connection=True;Encrypt=false; MultipleActiveResultSets=true"))
+            {
+                const string query = $"select top 600 * from Employees";
+                var allEmployees = await db.QueryAsync<EmployeeInfo>(query);
+                return allEmployees.ToList();
+            }
         }
 
         [Benchmark]

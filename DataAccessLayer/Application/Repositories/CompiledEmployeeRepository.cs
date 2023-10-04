@@ -22,7 +22,7 @@ namespace DataAccessLayer.Application.Repositories
 
         public static readonly Func<ApplicationDbContext, List<Employee>> GetAllEmployeeswithInfo =
          EF.CompileQuery((ApplicationDbContext context) =>
-            context.Set<Employee>().AsNoTracking().ToList());
+            context.Set<Employee>().ToList());
 
         public static readonly Func<ApplicationDbContext, List<Employee>> GetAllEmployeesWithoutInfo =
    EF.CompileQuery((ApplicationDbContext context) =>

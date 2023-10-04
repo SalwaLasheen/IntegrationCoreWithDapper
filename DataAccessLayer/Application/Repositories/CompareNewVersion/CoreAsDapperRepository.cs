@@ -1,5 +1,4 @@
-﻿using EFCoreVsDapper.Context;
-using EFCoreVsDapper.Models;
+﻿using DataAccessLayer.Persistence.Context;
 using Microsoft.EntityFrameworkCore;
 
 namespace EFCoreVsDapper.Repos
@@ -10,7 +9,7 @@ namespace EFCoreVsDapper.Repos
         {
             using (var db = new ApplicationDbContext())
             {
-                var employees = db.Employees.FromSql($"Select top 100 EmployeeName from Employees").Select(x=>x.EmployeeName).AsNoTracking().ToList();
+                var employees = db.Employees.FromSql($"Select top 100 EmployeeName from Employees").Select(x => x.EmployeeName).AsNoTracking().ToList();
                 return employees.ToList();
 
             }
@@ -42,6 +41,6 @@ namespace EFCoreVsDapper.Repos
 
             }
         }
-      
+
     }
 }
